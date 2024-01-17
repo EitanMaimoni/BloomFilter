@@ -1,7 +1,10 @@
-//hFunc.cpp
 #include "hFunc.h"
+
+//default constructor
 hFunc::hFunc() {
-    this->numOfHash = 0;
+
+    this->numOfHash = 1;
+
 }
 
 //constructor
@@ -11,15 +14,32 @@ hFunc::hFunc() {
 
 }
 
-int hFunc::activateFunction(std::string& url) {
+size_t hFunc::activateFunction(std::string& url) {
+    size_t index;
     if (this->numOfHash == 1)
     {
-       return std::hash<std::string>{}(url);
+        index = std::hash<std::string>{}(url);
+        if (index < 0)
+        {
+            index = index * -1;
+        }
+        printf("%zu", index % 8);
+        return index;
 
     }else if (this->numOfHash == 2)
     {
-        int firstValue = std::hash<std::string>{}(url);
-        return  std::hash<int>{}(firstValue);
+        index = std::hash<std::string>{}(url);
+        if (index < 0)
+        {
+            index = index * -1;
+        }
+        index = std::hash<std::string>{}(std::to_string(index));
+        if (index < 0)
+        {
+            index = index * -1;
+        }
+        printf("%zu", index % 8);
+        return  index;
     }
     return -1;
 }

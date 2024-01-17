@@ -12,6 +12,7 @@ int main() {
         
         if (!(iss >> X >> Y >> Z) || (Y != 1 && Y != 2) || (Z != 1 && Z != 2) || (X <= 0)) {
             // Extraction failed, not all numbers were present, or Y and Z are not 1 or 2
+            printf("Invalid input\n");
             continue;
         }
 
@@ -30,6 +31,7 @@ int main() {
             std::istringstream iss(line);
 
             if (!(iss >> x >> url) || (x != 1 && x != 2) || (url.length() == 0)) {
+                printf("Invalid input\n");
                 // Extraction failed or not all values were present
                 continue;
             }
@@ -44,7 +46,7 @@ int main() {
 
                 break;
             case 2:    
-                myBloomFilter.check(url);
+                myBloomFilter.check_url(url);
 
                 break;
             default:
