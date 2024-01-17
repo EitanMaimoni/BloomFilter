@@ -9,7 +9,7 @@ int main() {
 
     while (std::getline(std::cin, line)) {
         std::istringstream iss(line);
-
+        
         if (!(iss >> X >> Y >> Z) || (Y != 1 && Y != 2) || (Z != 1 && Z != 2) || (X <= 0)) {
             // Extraction failed, not all numbers were present, or Y and Z are not 1 or 2
             continue;
@@ -41,9 +41,11 @@ int main() {
         switch (x) {
             case 1:
                 myBloomFilter.add_url_to_bloomFilter(url);
+
                 break;
-            case 2:
-                myBloomFilter.is_on_bit_array(url);
+            case 2:    
+                myBloomFilter.check(url);
+
                 break;
             default:
                 // Go to the next iteration

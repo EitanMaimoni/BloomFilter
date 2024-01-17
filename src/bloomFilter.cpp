@@ -21,16 +21,17 @@ BloomFilter::BloomFilter(int ArrayLength , int firstHash,int secondHash) {
 }
 void BloomFilter::check(std::string& url){
     if(this->is_on_black_list(url)){
-        std::cout<<"true"<<std::endl;
+        printf("true ");
     }
     else{
-        std::cout<<"false"<<std::endl;
+        printf("false\n");
+        return;
     }
     if(this->is_on_bit_array(url)){
-        std::cout<<"true"<<std::endl;
+        printf("true\n");   
     }
     else{
-        std::cout<<"false"<<std::endl;
+        printf("false\n");
     }
 }   
 bool BloomFilter::is_on_bit_array(std::string& url){
