@@ -1,14 +1,7 @@
-#include "bloomFilter.h"
-#include <regex>
-#include <iostream>
-#include <stdexcept>
+// bloomFilter.cpp
 
-// Validate if a given string is a valid URL
-bool isValidURL(const std::string& url) {
-    // Regular expression for a simple URL validation
-    std::regex urlPattern("^(www\\.[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\\.com)$");
-    return std::regex_match(url, urlPattern);
-}
+#include "bloomFilter.h"
+#include <algorithm>
 
 // Default constructor
 BloomFilter::BloomFilter() {
@@ -16,28 +9,52 @@ BloomFilter::BloomFilter() {
     black_list = std::vector<std::string>();
 }
 
-// Constructor
+// Constructor with hash functions
 BloomFilter::BloomFilter(std::vector<int> args) {
     for (size_t i = 0; i < args.size(); i++) {
         if (i == 0) {
             this->bit_array.assign(args[0], false);
             break;
-        };
+        }
         this->hash_functions.push_back(args[i]);
     }
     black_list = std::vector<std::string>();
 }
 
+
+// Validate if the provided string is a valid URL
+bool BloomFilter::is_valid_url(const std::string& url) {
+
+    // Use a simple regular expression to check if the URL has a valid format
+    std::string regexPattern = "www.[a-zA-Z0-9]+.com";
+
+    // Create a regex object
+    std::regex pattern(regexPattern);
+
+    return std::regex_search(url, pattern);
+}
+
+// Add URL to the black list
+void BloomFilter::add_to_black_list(std::string& url) {
+    this->black_list.push_back(url);
+}
+
+//check if the URL is in the black list
+bool BloomFilter::is_on_black_list(std::string& url) {
+    return std::find(this->black_list.begin(), this->black_list.end(), url) != this->black_list.end();
+}
+
 // Add URL to the bloom filter
-void BloomFilter::addUrl(std::string& url) {
-    // Check if the URL is valid before adding it to the black list
-    if (!isValidURL(url)) {
-        std::cerr << "Invalid URL: " << url << std::endl;
-        return;
+void BloomFilter::add_url_to_bloomFilter(std::string& url) {
+    // Validate the URL
+    if (!is_valid_url(url)) {
+        throw std::invalid_argument("Invalid URL: " + url);
     }
 
+    // Add the URL to the black list
     add_to_black_list(url);
 
+    // Add the URL to the bloom filter
     for (size_t i = 0; i < hash_functions.size(); i++) {
         std::string answer = url;
         for (int j = 0; j < hash_functions[i]; j++) {
@@ -47,17 +64,14 @@ void BloomFilter::addUrl(std::string& url) {
     }
 }
 
-// Add URL to the black list
-void BloomFilter::add_to_black_list(std::string& url) {
-if (!isValidURL(url)) {
-        throw std::invalid_argument("URL cannot be added to the blacklist");
-        return;
-    }    
-    this->black_list.push_back(url);
-}
-
 // Check if the URL is blacklisted
 bool BloomFilter::check_url(std::string& url) {
+    // Validate the URL
+    if (!is_valid_url(url)) {
+        throw std::invalid_argument("Invalid URL: " + url);
+    }
+
+    // Check if the URL is blacklisted in the bloom filter
     for (size_t i = 0; i < hash_functions.size(); i++) {
         std::string answer = url;
         for (int j = 0; j < hash_functions[i]; j++) {
@@ -67,15 +81,8 @@ bool BloomFilter::check_url(std::string& url) {
             return false;
         }
     }
-    return double_check_url(url);
+
+    // check if the URL is blacklisted in the black list
+    return is_on_black_list(url);
 }
 
-// Double check if the URL is blacklisted
-bool BloomFilter::double_check_url(std::string& url) {
-    for (size_t i = 0; i < this->black_list.size(); i++) {
-        if (this->black_list[i] == url) {
-            return true;
-        }
-    }
-    return false;
-}
