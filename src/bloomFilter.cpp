@@ -1,70 +1,88 @@
-#include "bloomFilter.h"
+// bloomFilter.cpp
 
-//default constructor
+#include "bloomFilter.h"
+#include <algorithm>
+
+// Default constructor
 BloomFilter::BloomFilter() {
-    this->bit_array.assign(1,false);
-        black_list = std::vector<std::string>();
+    this->bit_array.assign(1, false);
+    black_list = std::vector<std::string>();
 }
 
-//constructor
+// Constructor with hash functions
 BloomFilter::BloomFilter(std::vector<int> args) {
-    //for each args we will add a hash function,
-    //exept for the first one that will be the size of the bit array
-    for (size_t i = 0; i < args.size(); i++)
-    {
-        if(i==0)
-        {
-            this->bit_array.assign(args[0],false);
+    for (size_t i = 0; i < args.size(); i++) {
+        if (i == 0) {
+            this->bit_array.assign(args[0], false);
             break;
-        };
+        }
         this->hash_functions.push_back(args[i]);
     }
     black_list = std::vector<std::string>();
 }
 
-//add url to the bloom filter
-void BloomFilter::addUrl(std::string& url){
+
+// Validate if the provided string is a valid URL
+bool BloomFilter::is_valid_url(const std::string& url) {
+
+    // Use a simple regular expression to check if the URL has a valid format
+    std::string regexPattern = "www.[a-zA-Z0-9]+.com";
+
+    // Create a regex object
+    std::regex pattern(regexPattern);
+
+    return std::regex_search(url, pattern);
+}
+
+// Add URL to the black list
+void BloomFilter::add_to_black_list(std::string& url) {
+    this->black_list.push_back(url);
+}
+
+//check if the URL is in the black list
+bool BloomFilter::is_on_black_list(std::string& url) {
+    return std::find(this->black_list.begin(), this->black_list.end(), url) != this->black_list.end();
+}
+
+// Add URL to the bloom filter
+void BloomFilter::add_url_to_bloomFilter(std::string& url) {
+    // Validate the URL
+    if (!is_valid_url(url)) {
+        throw std::invalid_argument("Invalid URL: " + url);
+    }
+
+    // Add the URL to the black list
     add_to_black_list(url);
-    for (size_t i = 0; i < hash_functions.size(); i++)
-    {
+
+    // Add the URL to the bloom filter
+    for (size_t i = 0; i < hash_functions.size(); i++) {
         std::string answer = url;
-        for (int j = 0; j < hash_functions[i] ; j++)
-        {
-            answer = std::hash<std::string>{}(answer) % this->bit_array.size();
+        for (int j = 0; j < hash_functions[i]; j++) {
+            answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
         }
         this->bit_array[std::stoi(answer)] = true;
     }
 }
 
-//add url to the black list
-void BloomFilter::add_to_black_list(std::string& url) {
-    this->black_list.push_back(url);
-}
-
-//check if the url is blacklisted
+// Check if the URL is blacklisted
 bool BloomFilter::check_url(std::string& url) {
-    for (size_t i = 0; i < hash_functions.size(); i++)
-    {
+    // Validate the URL
+    if (!is_valid_url(url)) {
+        throw std::invalid_argument("Invalid URL: " + url);
+    }
+
+    // Check if the URL is blacklisted in the bloom filter
+    for (size_t i = 0; i < hash_functions.size(); i++) {
         std::string answer = url;
-        for (int j = 0; j < hash_functions[i] ; j++)
-        {
-            answer = std::hash<std::string>{}(answer) % this->bit_array.size();
+        for (int j = 0; j < hash_functions[i]; j++) {
+            answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
         }
-        if (this->bit_array[std::stoi(answer)] = false)
-        {
+        if (this->bit_array[std::stoi(answer)] == false) {
             return false;
         }
-    } 
-    return double_check_url(url);
+    }
+
+    // check if the URL is blacklisted in the black list
+    return is_on_black_list(url);
 }
 
-//double check if the url is blacklisted
-bool BloomFilter::double_check_url(std::string& url) {
-    for (size_t i = 0; i < this->black_list.size(); i++)
-    {
-        if(this->black_list[i]==url){
-            return true;
-        }
-    }
-     return false; 
-}
