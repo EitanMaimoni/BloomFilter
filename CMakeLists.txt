@@ -23,12 +23,12 @@ set(TEST_FILES
     tests/test_main.cpp # this is the main for tests
     tests/bloomFilter_test.cpp # this file contain the tests
 )
-add_executable(CalcTests ${TEST_FILES})
+add_executable(bloomFilter ${TEST_FILES})
 
 # Link Google Test to the test executable
-target_link_libraries(CalcTests PRIVATE gtest gtest_main)
+target_link_libraries(bloomFilter PRIVATE gtest gtest_main)
 
 # Include the source directory for tests
-target_include_directories(CalcTests PRIVATE src)
+target_include_directories(bloomFilter PRIVATE src)
 include(GoogleTest)
-add_test(NAME CalcTests COMMAND CalcTests)
+add_test(NAME bloomFilter COMMAND bloomFilter)
