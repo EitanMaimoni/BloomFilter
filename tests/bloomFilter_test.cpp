@@ -11,7 +11,7 @@ TEST(SanityCheck, ADD_URL) {
 
 TEST(SanityCheck, NOT_BLACKLISTED_URL) {
     BloomFilter bloom_filter;
-    std::string url = "notblacklisted.com";
+    std::string url = "www.notblacklisted.com";
     EXPECT_FALSE(bloom_filter.check_url(url));
 }
 
