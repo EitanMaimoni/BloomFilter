@@ -19,27 +19,13 @@ size_t hFunc::activateFunction(std::string& url) {
     if (this->numOfHash == 1)
     {
         index = std::hash<std::string>{}(url);
-        if (index < 0)
-        {
-            index = index * -1;
-        }
-        printf("%zu", index % 8);
         return index;
-
-    }else if (this->numOfHash == 2)
+    }
+    else if (this->numOfHash == 2)
     {
         index = std::hash<std::string>{}(url);
-        if (index < 0)
-        {
-            index = index * -1;
-        }
-        index = std::hash<std::string>{}(std::to_string(index));
-        if (index < 0)
-        {
-            index = index * -1;
-        }
-        printf("%zu", index % 8);
-        return  index;
+        index = std::hash<size_t>{}(index);
+        return index;
     }
-    return -1;
+    return 0; // Return 0 or another suitable value if numOfHash is not 1 or 2
 }
