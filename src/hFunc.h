@@ -8,15 +8,17 @@
 
 class hFunc {
     public:
+    hFunc();
+
      //  constructor
     hFunc(int number);
 
+     // Add URL to the bloom filter
+    int activateFunction(std::string& url);
+
 private:
-  int numOfHash;
-
-    // Add URL to the bloom filter
-    void activateFunction(std::string& url);
-
+    int numOfHash;
+      
 };
 
 #endif  // HFUNC;

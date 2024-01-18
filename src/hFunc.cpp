@@ -1,19 +1,22 @@
 //hFunc.cpp
 #include "hFunc.h"
 
+
 //constructor
  hFunc::hFunc(int number) {
+
     this->numOfHash = number;
+
 }
 
-void hFunc::activateFunction(std::string& url) {
+int hFunc::activateFunction(std::string& url) {
     if (this->numOfHash == 1)
     {
-        this->numOfHash = std::hash<std::string>{}(url);
+       return std::hash<std::string>{}(url);
 
     }else if (this->numOfHash == 2)
     {
-        int firstHash = std::hash<std::string>{}(url);
-        this->numOfHash = std::hash<int>{}(firstHash);
+        int firstValue = std::hash<std::string>{}(url);
+        return  std::hash<int>{}(firstValue);
     }
 }

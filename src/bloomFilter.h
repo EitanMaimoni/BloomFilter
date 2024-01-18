@@ -26,11 +26,10 @@ public:
 
 private:
     std::vector<bool> bit_array;  // Bit array for the bloom filter
-    std::vector<int> hash_functions;  // Hash functions for indexing
     std::vector<std::string> black_list;  // Blacklisted URLs
     hFunc hFunc1;
     hFunc hFunc2;
-
+    bool is_valid_hFunc;
     // Double-check if the URL is blacklisted
     bool is_on_black_list(std::string& url);
 
