@@ -19,18 +19,21 @@ BloomFilter::BloomFilter(int ArrayLength , int firstHash,int secondHash) {
     black_list = std::vector<std::string>();
 }
 bool BloomFilter::is_on_bit_array(std::string& url){
+
     std::string answer = url;
-    // answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
     int index = this->hFunc1.activateFunction(answer);
     //if the url is in the bit arrasy
     if(this->bit_array[index % this->bit_array.size()]){
-        //double check if the url is in the black list
+        //double check if the hash2 is valid
         if(this->is_valid_hFunc){  
             index = this->hFunc2.activateFunction(answer);
             if(this->bit_array[index % this->bit_array.size()]){
                 return true;
+            }else{
+            return true;
             }
         }
+
     }
 
     return false;
@@ -54,11 +57,22 @@ void BloomFilter::add_url_to_bloomFilter(std::string& url) {
     // answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
     int index = this->hFunc1.activateFunction(answer);
     this->bit_array[index % this->bit_array.size()]=true;
+
     if(this->is_valid_hFunc){
         index = this->hFunc2.activateFunction(answer);
         this->bit_array[index % this->bit_array.size()]=true;
     } 
 }
-
-
-
+bool BloomFilter::check(std::string& url) {
+    std::string answer = url;
+    bool is_on_bit_array = this->is_on_bit_array(answer);
+    //if the url is in the bit arrasy
+    if(is_on_bit_array){
+        bool black_list =this->is_on_black_list(answer);
+        //double check if the url is in the black list
+        if(black_list){  
+          return true;
+        }
+    }
+    return false;
+}
