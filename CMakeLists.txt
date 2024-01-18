@@ -17,14 +17,14 @@ enable_testing()
 
 set(SOURCE_FILES
     src/bloomFilter.cpp # this is where the code we want to test
+    src/hFunc.cpp  # Add this line if hFunc.cpp is a source file
 )
 
 set(TEST_FILES
     tests/test_main.cpp # this is the main for tests
     tests/bloomFilter_test.cpp # this file contain the tests
 )
-add_executable(bloomFilter ${TEST_FILES})
-
+add_executable(bloomFilter ${SOURCE_FILES} ${TEST_FILES})
 # Link Google Test to the test executable
 target_link_libraries(bloomFilter PRIVATE gtest gtest_main)
 
