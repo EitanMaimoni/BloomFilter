@@ -14,7 +14,7 @@ class hFunc {
     hFunc(int number);
 
      // Add URL to the bloom filter
-    int activateFunction(std::string& url);
+    size_t activateFunction(std::string& url);
 
 private:
     int numOfHash;

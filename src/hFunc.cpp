@@ -1,5 +1,6 @@
 //hFunc.cpp
 #include "hFunc.h"
+#include <iostream>
 hFunc::hFunc() {
     this->numOfHash = 0;
 }
@@ -10,16 +11,18 @@ hFunc::hFunc() {
     this->numOfHash = number;
 
 }
-
-int hFunc::activateFunction(std::string& url) {
+size_t hFunc::activateFunction(std::string& url) {
     if (this->numOfHash == 1)
     {
-       return std::hash<std::string>{}(url);
+        printf("hahaha");
+        std::cout << std::hash<std::string>{}(url)<< std::endl;
+        printf("hahaha");
+        return std::hash<std::string>{}(url);
 
     }else if (this->numOfHash == 2)
     {
-        int firstValue = std::hash<std::string>{}(url);
-        return  std::hash<int>{}(firstValue);
+        std::string firstValue = std::to_string(std::hash<std::string>{}(url));
+        return  std::hash<std::string>{}(firstValue);
     }
     return -1;
 }

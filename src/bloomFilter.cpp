@@ -2,6 +2,7 @@
 
 #include "bloomFilter.h"
 #include "hFunc.h"
+#include <iostream>
 
 BloomFilter::BloomFilter(int ArrayLength ,int firstHash) {
     this->hFunc1 = hFunc(firstHash);
@@ -29,7 +30,9 @@ bool BloomFilter::is_on_bit_array(std::string& url){
             index = this->hFunc2.activateFunction(answer);
             if(this->bit_array[index % this->bit_array.size()]){
                 return true;
-            }else{
+            }
+            else
+            {
             return true;
             }
         }
@@ -41,7 +44,13 @@ bool BloomFilter::is_on_bit_array(std::string& url){
 // Add URL to the black list
 void BloomFilter::add_to_black_list(std::string& url) {
     this->black_list.push_back(url);
-}
+///////////////////////TODO: remove this
+// std::cout << "the black list is: " << std::endl;
+//     for (const auto& element : this->black_list) {
+//         std::cout << element << " ";
+//     }
+//     std::cout << std::endl;
+ }
 
 //check if the URL is in the black list
 bool BloomFilter::is_on_black_list(std::string& url) {
@@ -51,17 +60,21 @@ bool BloomFilter::is_on_black_list(std::string& url) {
 // Add URL to the bloom filter
 void BloomFilter::add_url_to_bloomFilter(std::string& url) {
     // Add the URL to the black list
-    add_to_black_list(url);
-    // Add the URL to the bloom filter
-    std::string answer = url;
-    // answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
-    int index = this->hFunc1.activateFunction(answer);
-    this->bit_array[index % this->bit_array.size()]=true;
+        add_to_black_list(url);
+        // Add the URL to the bloom filter
+        std::string answer = url;
+        //answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
+        
+        size_t  index =this->hFunc1.activateFunction(answer);
+        std::cout << "the index -" + index << std::endl;
+        // this->bit_array[index % this->bit_array.size()] = true;
+     
 
-    if(this->is_valid_hFunc){
-        index = this->hFunc2.activateFunction(answer);
-        this->bit_array[index % this->bit_array.size()]=true;
-    } 
+        // if(this->is_valid_hFunc){
+        //      index = this->hFunc2.activateFunction(answer);
+             
+        //      this->bit_array[index % this->bit_array.size()] = true;
+        //  } 
 }
 bool BloomFilter::check(std::string& url) {
     std::string answer = url;
