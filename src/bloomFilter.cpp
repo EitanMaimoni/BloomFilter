@@ -2,6 +2,7 @@
 
 #include "bloomFilter.h"
 #include "hFunc.h"
+#include <iostream>
 
 BloomFilter::BloomFilter(int ArrayLength ,int firstHash) {
     this->hFunc1 = hFunc(firstHash);
@@ -18,7 +19,22 @@ BloomFilter::BloomFilter(int ArrayLength , int firstHash,int secondHash) {
     this->bit_array.assign(ArrayLength, false);
     black_list = std::vector<std::string>();
 }
+void BloomFilter::check(std::string& url){
+    if(this->is_on_black_list(url)){
+        std::cout<<"true"<<std::endl;
+    }
+    else{
+        std::cout<<"false"<<std::endl;
+    }
+    if(this->is_on_bit_array(url)){
+        std::cout<<"true"<<std::endl;
+    }
+    else{
+        std::cout<<"false"<<std::endl;
+    }
+}   
 bool BloomFilter::is_on_bit_array(std::string& url){
+    //write me a print command
     std::string answer = url;
     // answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
     int index = this->hFunc1.activateFunction(answer);
@@ -30,7 +46,9 @@ bool BloomFilter::is_on_bit_array(std::string& url){
             if(this->bit_array[index % this->bit_array.size()]){
                 return true;
             }
+            return false;
         }
+        return true;
     }
 
     return false;
@@ -54,6 +72,7 @@ void BloomFilter::add_url_to_bloomFilter(std::string& url) {
     // answer = std::to_string(std::hash<std::string>{}(answer) % this->bit_array.size());
     int index = this->hFunc1.activateFunction(answer);
     this->bit_array[index % this->bit_array.size()]=true;
+
     if(this->is_valid_hFunc){
         index = this->hFunc2.activateFunction(answer);
         this->bit_array[index % this->bit_array.size()]=true;

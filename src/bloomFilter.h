@@ -19,7 +19,7 @@ public:
 
     // Add URL to the bloom filter
     void add_url_to_bloomFilter(std::string& url);
-
+    void check(std::string& url);
     // Check if the URL is blacklisted
     bool check_url(std::string& url);
     bool is_on_bit_array(std::string& url);
