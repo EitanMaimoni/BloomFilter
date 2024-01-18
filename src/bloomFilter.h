@@ -22,6 +22,7 @@ public:
 
     // Check if the URL is blacklisted
     bool check_url(std::string& url);
+    bool is_on_bit_array(std::string& url);
 
 
 private:
