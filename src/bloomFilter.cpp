@@ -2,6 +2,14 @@
 #include "hFunc.h"
 #include <iostream>
 
+// Default constructor
+BloomFilter::BloomFilter() {
+    this->bit_array.assign(0, false);
+    this->hFunc1 = hFunc();
+    this->hFunc2Flag = false;
+    black_list = std::vector<std::string>();
+}
+
 // Constructor with hash 1 function
 BloomFilter::BloomFilter(int ArrayLength ,int firstHash) {
     this->bit_array.assign(ArrayLength, false);

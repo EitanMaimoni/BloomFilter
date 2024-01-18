@@ -10,9 +10,11 @@
 class BloomFilter {
 public:
     // Default constructor
+    BloomFilter();
+    // Constructor with hash function
     BloomFilter(int ArrayLength ,int firstHash);
     // Constructor with hash functions
-    BloomFilter(int ArrayLength , int firstHash,int secondHash);
+    BloomFilter(int ArrayLength , int firstHash, int secondHash);
 
     // Add URL to the bloom filter
     void add_url_to_bloomFilter(std::string& url);
