@@ -2,7 +2,7 @@
 
 
 int main() {
-    BloomFilter bloomFilter;
+    
     
     // Use the bloomFilter object here
     
