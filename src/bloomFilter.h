@@ -19,10 +19,9 @@ public:
 
     // Add URL to the bloom filter
     void add_url_to_bloomFilter(std::string& url);
-
-   
-    bool check(std::string& url);  // Add this line to declare the function
-   
+    void check(std::string& url);
+    // Check if the URL is blacklisted
+    bool check_url(std::string& url);
     bool is_on_bit_array(std::string& url);
     //need to change to private at the end its here only for checking
     bool is_on_black_list(std::string& url);
