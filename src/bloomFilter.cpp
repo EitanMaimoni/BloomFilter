@@ -1,10 +1,10 @@
 // bloomFilter.cpp
 
 #include "bloomFilter.h"
-#include <algorithm>
+#include "hFunc.h"
 
-// Default constructor
 BloomFilter::BloomFilter(int ArrayLength ,int firstHash) {
+    this->hFunc1 = hFunc(firstHash);
     this->bit_array.assign(ArrayLength, false);
     black_list = std::vector<std::string>();
 }

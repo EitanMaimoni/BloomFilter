@@ -3,6 +3,7 @@
 #ifndef BLOOMFILTER_H
 #define BLOOMFILTER_H
 
+#include "hFunc.h"
 #include <vector>
 #include <string>
 #include <regex>
@@ -27,6 +28,8 @@ private:
     std::vector<bool> bit_array;  // Bit array for the bloom filter
     std::vector<int> hash_functions;  // Hash functions for indexing
     std::vector<std::string> black_list;  // Blacklisted URLs
+    hFunc hFunc1;
+    hFunc hFunc2;
 
     // Double-check if the URL is blacklisted
     bool is_on_black_list(std::string& url);

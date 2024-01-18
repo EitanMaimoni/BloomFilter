@@ -7,10 +7,12 @@
 #include <stdexcept>
 
 class hFunc {
-    int numOfHash;
-public:
-    // Default constructor
+    public:
+     //  constructor
     hFunc(int number);
+
+private:
+  int numOfHash;
 
     // Add URL to the bloom filter
     void activateFunction(std::string& url);

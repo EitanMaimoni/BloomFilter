@@ -1,5 +1,6 @@
+//hFunc.cpp
 #include "hFunc.h"
-#include <algorithm>
+
 //constructor
  hFunc::hFunc(int number) {
     this->numOfHash = number;
