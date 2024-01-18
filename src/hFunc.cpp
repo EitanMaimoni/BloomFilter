@@ -1,6 +1,8 @@
 //hFunc.cpp
 #include "hFunc.h"
-
+hFunc::hFunc() {
+    this->numOfHash = 0;
+}
 
 //constructor
  hFunc::hFunc(int number) {
@@ -19,4 +21,5 @@ int hFunc::activateFunction(std::string& url) {
         int firstValue = std::hash<std::string>{}(url);
         return  std::hash<int>{}(firstValue);
     }
+    return -1;
 }

@@ -23,8 +23,8 @@ public:
     // Check if the URL is blacklisted
     bool check_url(std::string& url);
     bool is_on_bit_array(std::string& url);
-
-
+    //need to change to private at the end its here only for checking
+    bool is_on_black_list(std::string& url);
 private:
     std::vector<bool> bit_array;  // Bit array for the bloom filter
     std::vector<std::string> black_list;  // Blacklisted URLs
@@ -32,7 +32,7 @@ private:
     hFunc hFunc2;
     bool is_valid_hFunc;
     // Double-check if the URL is blacklisted
-    bool is_on_black_list(std::string& url);
+    
 
     // Add URL to the black list
     void add_to_black_list(std::string& url);

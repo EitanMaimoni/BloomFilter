@@ -1,4 +1,4 @@
-#ifndef HFUNC
+#ifndef HFUNC_H
 #define HFUNC_H
 
 #include <vector>

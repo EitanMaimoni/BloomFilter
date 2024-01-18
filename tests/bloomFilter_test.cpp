@@ -1,73 +1,69 @@
 #include <gtest/gtest.h>
-#include "../src/bloomFilter.cpp" // here we include the code to be tested
-
+#include "../src/bloomFilter.h" // here we include the code to be tested
+#include "../src/hFunc.h" // here we include the code to be tested
+int length=64;
 //checking if we can add a url to the black list
 TEST(SanityCheck, ADD_URL) {
-    BloomFilter bloom_filter(100, 1);
+    BloomFilter bloom_filter(length, 1);
     std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
     bloom_filter.add_url_to_bloomFilter(url);
-    EXPECT_TRUE(bloom_filter.check_url(url));
+    EXPECT_TRUE(bloom_filter.is_on_bit_array(url));
+    EXPECT_FALSE(bloom_filter.is_on_bit_array(url1));
 }
-
-//checking if unblacklisted url is not blacklisted
-TEST(SanityCheck, NOT_BLACKLISTED_URL) {
-    BloomFilter bloom_filter(10,1);
-    std::string url = "www.notblacklisted.com";
-    EXPECT_FALSE(bloom_filter.check_url(url));
+TEST(SanityCheck, ADD_URL1) {
+    BloomFilter bloom_filter(length, 1);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_black_list(url));
+    EXPECT_FALSE(bloom_filter.is_on_black_list(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL1) {
-    BloomFilter bloom_filter(5,1,2);  
-    std::string url = "imNotURL.com";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL2) {
+    BloomFilter bloom_filter(length, 2);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_bit_array(url));
+    EXPECT_FALSE(bloom_filter.is_on_bit_array(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL2) {
-    BloomFilter bloom_filter(10,1,1);
-    std::string url = ".imNotURL.com";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL3) {
+    BloomFilter bloom_filter(length, 2);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_black_list(url));
+    EXPECT_FALSE(bloom_filter.is_on_black_list(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL3) {
-    BloomFilter bloom_filter(10,1,1);
-    std::string url = "www..com";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL4) {
+    BloomFilter bloom_filter(length, 1,2);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_bit_array(url));
+    EXPECT_FALSE(bloom_filter.is_on_bit_array(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL4) {
-    BloomFilter bloom_filter(10,1,1);
-    std::string url = "www.com";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL5) {
+    BloomFilter bloom_filter(length, 1,2);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_black_list(url));
+    EXPECT_FALSE(bloom_filter.is_on_black_list(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL5) {
-    BloomFilter bloom_filter(5,2);
-    std::string url = "www.imNotURL.";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL6) {
+    BloomFilter bloom_filter(length, 2,1);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_bit_array(url));
+    EXPECT_FALSE(bloom_filter.is_on_bit_array(url1));
 }
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, ADD_BASIC_URL6) {
-    BloomFilter bloom_filter(10,1,1);
-    std::string url = "www.imNotURL";
-    ASSERT_THROW(bloom_filter.add_url_to_bloomFilter(url), std::invalid_argument);
-}
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, CHECK_BASIC_URL1) {
-    BloomFilter bloom_filter(10,1,1);
-    std::string url = "imNotURL.com";
-    ASSERT_THROW(bloom_filter.check_url(url), std::invalid_argument);
-}
-
-//checking if we cant add unvalid url to the black list
-TEST(UNVALID_URL, DOUBLE_CHECK_BASIC_URL1) {
-    BloomFilter bloom_filter(8,2,2);
-    std::string url = "www.imNotURL";
-    ASSERT_THROW(bloom_filter.check_url(url), std::invalid_argument);
+TEST(SanityCheck, ADD_URL7) {
+    BloomFilter bloom_filter(length, 2,1);
+    std::string url = "www.blacklist.com";
+    std::string url1 = "www.blacklist1.com";
+    bloom_filter.add_url_to_bloomFilter(url);
+    EXPECT_TRUE(bloom_filter.is_on_black_list(url));
+    EXPECT_FALSE(bloom_filter.is_on_black_list(url1));
 }
