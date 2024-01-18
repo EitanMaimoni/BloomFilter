@@ -4,23 +4,22 @@
 #include <algorithm>
 
 // Default constructor
-BloomFilter::BloomFilter() {
-    this->bit_array.assign(1, false);
+BloomFilter::BloomFilter(int ArrayLength ,int firstHash) {
+    this->bit_array.assign(ArrayLength, false);
     black_list = std::vector<std::string>();
 }
 
 // Constructor with hash functions
-BloomFilter::BloomFilter(std::vector<int> args) {
-    for (size_t i = 0; i < args.size(); i++) {
-        if (i == 0) {
-            this->bit_array.assign(args[0], false);
-            break;
-        }
-        this->hash_functions.push_back(args[i]);
+BloomFilter::BloomFilter(int ArrayLength , int firstHash,int secondHash) {
+    
+    this->bit_array.assign(ArrayLength, false);
+
+    for (size_t i = 0; i < ArrayLength; i++) {
+       
+        this->hash_functions.push_back(i);
     }
     black_list = std::vector<std::string>();
 }
-
 
 // Validate if the provided string is a valid URL
 bool BloomFilter::is_valid_url(const std::string& url) {
