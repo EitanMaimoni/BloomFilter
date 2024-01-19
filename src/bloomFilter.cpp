@@ -81,17 +81,17 @@ void BloomFilter::add_url_to_bloomFilter(std::string& url) {
 // Check if the URL is blacklisted
 void BloomFilter::check_url(std::string& url){
     if(this->is_on_bit_array(url)){
-        printf("true ");
+        std::cout << "true " ;
     }
     else{
-        printf("false\n");
+        std::cout << "false" << std::endl;;
         return;
     }
     if(this->is_on_black_list(url)){
-        printf("true\n");   
+        std::cout << "true" << std::endl;   
     }
     else{
-        printf("false\n");
+        std::cout << "false" << std::endl;;
     }
 }
 
