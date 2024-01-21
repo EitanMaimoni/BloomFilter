@@ -2,8 +2,9 @@
 #include <string>
 #include "app.h"
 #include "bloomFilter.h"
-#include "twoHashBloomFilterValidator.h"
-#include "oneHashBloomFilterValidator.h" 
+#include "twoHashValidator.h"
+#include "oneHashValidator.h" 
+#include "commandValidator.h"
 
 // Default constructor
 app::app() {
@@ -13,29 +14,33 @@ app::app() {
 void app::run() {
 
     BloomFilter myBloomFilter;
-    oneHashBloomFilterValidator myValidator1;
-    twoHashBloomFilterValidator myValidator2;
+    oneHashValidator myValidator1;
+    twoHashValidator myValidator2;
 
-    std::vector<int> result(3);
+    std::vector<std::string> initInput(3);
 
     std::string line;
     
     while (std::getline(std::cin, line)) {
         std::istringstream iss(line);
-        result = myValidator2.validationCheck(line);
-        if (result != std::vector<int>()) {
+        initInput = myValidator2.validationCheck(line);
+        if (initInput != std::vector<std::string>()) {
             // If we get here, we successfully read X, Y, and Z
-            myBloomFilter = BloomFilter(result[0], result[1], result[2]);
+            myBloomFilter = BloomFilter(std::stoi(initInput[0]), std::stoi(initInput[1]), std::stoi(initInput[2]));
             break;
         }
-        result = myValidator2.validationCheck(line);
-        if (result != std::vector<int>()) {
+        initInput = myValidator2.validationCheck(line);
+        if (initInput != std::vector<std::string>()) {
             // If we get here, we successfully read X, Y
-            myBloomFilter = BloomFilter(result[0], result[1]);
+            myBloomFilter = BloomFilter(std::stoi(initInput[0]), std::stoi(initInput[1]));
             break;
         }
     }
 
+    commandValidator myCommandValidator;
+
+    std::vector<std::string> commandInput(2);
+    
     while (true) {
         int x;
         std::string url;
@@ -43,28 +48,10 @@ void app::run() {
 
         while (std::getline(std::cin, line)) {
             std::istringstream iss(line);
-
-            if (!(iss >> x >> url) || (x != 1 && x != 2) || (url.length() == 0)) {
-                // Extraction failed or not all values were present
-                continue;
+            commandInput = myCommandValidator.validationCheck(line);
+            if (commandInput != std::vector<std::string>()) {
+                break;
             }
-
-            // If we get here, we successfully read x and url
-            break;
-        }
-
-        switch (x) {
-            case 1:
-                myBloomFilter.add_url_to_bloomFilter(url);
-
-                break;
-            case 2:    
-                myBloomFilter.check_url(url);
-
-                break;
-            default:
-                // Go to the next iteration
-                continue;
         }
     }
 }
