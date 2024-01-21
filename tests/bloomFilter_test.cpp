@@ -65,7 +65,7 @@ int length=64;
     std::streambuf* oldCout2 = std::cout.rdbuf(ss2.rdbuf());
 
     // Check the second URL
-    bloom_filter.check_url(url1);
+    check_url.execute(url1);
 
     // Capture the content of the stringstream for the second call
     std::string output2 = ss2.str();
@@ -106,7 +106,7 @@ int length=64;
     std::streambuf* oldCout3 = std::cout.rdbuf(ss3.rdbuf());
 
     
-    bloom_filter.check_url(url1);
+    check_url.execute(url1);
 
     std::string output3 = ss3.str();
     std::cout.rdbuf(oldCout3);
@@ -115,7 +115,7 @@ int length=64;
     std::stringstream ss4;
     std::streambuf* oldCout4 = std::cout.rdbuf(ss4.rdbuf());
 
-    bloom_filter.check_url(url2);
+    check_url.execute(url2);
     std::string output4 = ss4.str();
     std::cout.rdbuf(oldCout4);
     EXPECT_EQ(output4, "true false\n");
@@ -136,7 +136,7 @@ int length=64;
     EXPECT_EQ(output1, "true true\n");
     std::stringstream ss2;
     std::streambuf* oldCout2 = std::cout.rdbuf(ss2.rdbuf());
-    bloom_filter.check_url(url1);
+    check_url.execute(url1);
     std::string output2 = ss2.str();
     std::cout.rdbuf(oldCout2);
     EXPECT_EQ(output2, "true false\n");
@@ -156,7 +156,7 @@ TEST(ProfessorTests, third) {
     EXPECT_EQ(output1, "true true\n");
     std::stringstream ss2;
     std::streambuf* oldCout2 = std::cout.rdbuf(ss2.rdbuf());
-    bloom_filter.check_url(url1);
+    check_url.execute(url1);
     std::string output2 = ss2.str();
     std::cout.rdbuf(oldCout2);
     EXPECT_EQ(output2, "true false\n");
