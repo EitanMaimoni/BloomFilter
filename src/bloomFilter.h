@@ -6,6 +6,7 @@
 #include <string>
 #include <regex>
 #include <stdexcept>
+#include <map>
 
 class BloomFilter {
 public:
@@ -20,6 +21,15 @@ public:
     void add_url_to_bloomFilter(std::string& url);
     // Check if the URL is blacklisted
     void check_url(std::string& url);
+    //geters and setters
+    std::string& get_url();
+    std::vector<bool>& get_bit_array();
+    std::vector<std::string>& get_black_list();
+    hFunc& get_hFunc1();
+    hFunc& get_hFunc2();
+    bool get_hFunc2Flag();
+    void set_bit_array(std::vector<bool>& bit_array);
+    void set_black_list(std::vector<std::string>& black_list);
 
 private:
     std::vector<bool> bit_array;  // Bit array for the bloom filter
@@ -27,7 +37,8 @@ private:
     hFunc hFunc1;
     hFunc hFunc2;
     bool hFunc2Flag;
-
+    std::map<int, Icommand*> map;
+    
     // Add URL to the black list
     void add_to_black_list(std::string& url);
     // Add URL to the 
