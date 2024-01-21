@@ -22,7 +22,7 @@ set(SOURCE_FILES
     src/twoHashValidator.cpp # Add this line if twoHashBloomFilterValidator.cpp is a source file
     src/addUrl.cpp
     src/checkUrl.cpp
-    src/commandValidator
+    src/commandValidator.cpp
 )
 
 set(TEST_FILES

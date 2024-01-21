@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include "../src/iValidator.h"
 #include "../src/twoHashValidator.h"
 #include <vector>
 
