@@ -1,8 +1,10 @@
-//hFunc.cpp
 #include "hFunc.h"
-#include <iostream>
+
+//default constructor
 hFunc::hFunc() {
-    this->numOfHash = 0;
+
+    this->numOfHash = 1;
+
 }
 
 //constructor
@@ -11,18 +13,18 @@ hFunc::hFunc() {
     this->numOfHash = number;
 
 }
+
 size_t hFunc::activateFunction(std::string& url) {
+    size_t index;
     if (this->numOfHash == 1)
     {
-        printf("hahaha");
-        std::cout << std::hash<std::string>{}(url)<< std::endl;
-        printf("hahaha");
-        return std::hash<std::string>{}(url);
+        index = std::hash<std::string>{}(url);
+        return index;
 
     }else if (this->numOfHash == 2)
     {
-        std::string firstValue = std::to_string(std::hash<std::string>{}(url));
-        return  std::hash<std::string>{}(firstValue);
+        index = std::hash<std::string>{}(std::to_string(std::hash<std::string>{}(url)));
+        return  index;
     }
     return -1;
 }
