@@ -1,18 +1,21 @@
 #include <gtest/gtest.h>
+#include "../src/addURL.h"
+#include "../src/checkURL.h"
 #include "../src/bloomFilter.h" // here we include the code to be tested
-#include "../src/hFunc.h" // here we include the code to be tested
+ // here we include the code to be tested
 int length=64;
- TEST(SanityCheck, ADD_URL0) {
+ TEST(SanityCheck, ADD_URL) {
     BloomFilter bloom_filter(1, 1,2);
+    AddUrl add_url(bloom_filter);
+    CheckUrl check_url(bloom_filter);
     std::string url = "www.blacklist.com";
     std::string url1 = "www.blacklist1.com";
-
     // Redirect std::cout to a stringstream for the first call
     std::stringstream ss1;
     std::streambuf* oldCout1 = std::cout.rdbuf(ss1.rdbuf());
     // Add URL to the BloomFilter
-    bloom_filter.add_url_to_bloomFilter(url);
-    bloom_filter.check_url(url);
+    add_url.execute(url);
+    check_url.execute(url);
     // Capture the content of the stringstream for the first call
     std::string output1 = ss1.str();
 
@@ -26,7 +29,7 @@ int length=64;
     std::streambuf* oldCout2 = std::cout.rdbuf(ss2.rdbuf());
 
     // Check the second URL
-    bloom_filter.check_url(url1);
+    check_url.execute(url1);
 
     // Capture the content of the stringstream for the second call
     std::string output2 = ss2.str();
@@ -41,13 +44,14 @@ int length=64;
     BloomFilter bloom_filter(length, 1);
     std::string url = "www.blacklist.com";
     std::string url1 = "www.blacklist1.com";
-
+    AddUrl add_url(bloom_filter);
+    CheckUrl check_Url(bloom_filter);
     // Redirect std::cout to a stringstream for the first call
     std::stringstream ss1;
     std::streambuf* oldCout1 = std::cout.rdbuf(ss1.rdbuf());
     // Add URL to the BloomFilter
-    bloom_filter.add_url_to_bloomFilter(url);
-    bloom_filter.check_url(url);
+    add_url.execute(url)
+    check_url.execute(url)
     // Capture the content of the stringstream for the first call
     std::string output1 = ss1.str();
 
@@ -77,19 +81,20 @@ int length=64;
     std::string url = "www.example.com0";
     std::string url1 = "www.example.com1";
     std::string url2 = "www.example.com11";
-
+    AddUrl add_url(bloom_filter);
+    CheckUrl check_Url(bloom_filter);
     std::stringstream ss1;
     std::streambuf* oldCout1 = std::cout.rdbuf(ss1.rdbuf());
-    bloom_filter.check_url(url);
+    check_url.execute(url)
     std::string output1 = ss1.str();
     std::cout.rdbuf(oldCout1);
     EXPECT_EQ(output1, "false\n");
-    bloom_filter.add_url_to_bloomFilter(url);
+    add_url.execute(url)
     std::stringstream ss2;
     std::streambuf* oldCout2 = std::cout.rdbuf(ss2.rdbuf());
 
    
-    bloom_filter.check_url(url);
+    check_url.execute(url)
 
 
     std::string output2 = ss2.str();
@@ -120,10 +125,12 @@ int length=64;
     BloomFilter bloom_filter(8, 1);
     std::string url = "www.example.com0";
     std::string url1 = "www.example.com1";
-    bloom_filter.add_url_to_bloomFilter(url);    
+    AddUrl add_url(bloom_filter);
+    CheckUrl check_Url(bloom_filter);
+    add_url.execute(url)    
     std::stringstream ss1;
     std::streambuf* oldCout1 = std::cout.rdbuf(ss1.rdbuf());
-    bloom_filter.check_url(url);
+    check_url.execute(url)
     std::string output1 = ss1.str();
     std::cout.rdbuf(oldCout1);
     EXPECT_EQ(output1, "true true\n");
@@ -138,10 +145,12 @@ TEST(ProfessorTests, third) {
     BloomFilter bloom_filter(8, 2);
     std::string url = "www.example.com0";
     std::string url1 = "www.example.com4";
-    bloom_filter.add_url_to_bloomFilter(url);    
+    AddUrl add_url(bloom_filter);
+    CheckUrl check_Url(bloom_filter);
+    add_url.execute(url)    
     std::stringstream ss1;
     std::streambuf* oldCout1 = std::cout.rdbuf(ss1.rdbuf());
-    bloom_filter.check_url(url);
+    check_url.execute(url)
     std::string output1 = ss1.str();
     std::cout.rdbuf(oldCout1);
     EXPECT_EQ(output1, "true true\n");
