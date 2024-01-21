@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include "../src/addUrl.h"
 #include "../src/checkUrl.h"
-#include "../src/bloomFilter.h" // here we include the code to be tested
- // here we include the code to be tested
+#include "../src/bloomFilter.h" 
+#include "../src/Icommand.h"
 int length=64;
  TEST(SanityCheck, ADD_URL) {
     BloomFilter bloom_filter(1, 1,2);
@@ -40,7 +40,7 @@ int length=64;
     // Check the content of the stringstream for the second call
     EXPECT_EQ(output2, "true false\n");
 }
-    TEST(SanityCheck, ADD_URL) {
+    TEST(SanityCheck, ADD_URL1) {
     BloomFilter bloom_filter(length, 1);
     std::string url = "www.blacklist.com";
     std::string url1 = "www.blacklist1.com";

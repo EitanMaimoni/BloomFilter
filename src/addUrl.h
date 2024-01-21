@@ -9,7 +9,7 @@ class addUrl: public Icommand{
         addUrl(BloomFilter* bloomFilter);
 
         // Add URL to the bloom filter
-        void execute(std::string& url)override;
+         void execute(std::string& url)override;
     private:
         //pointer to the bloom filter
         BloomFilter* bloomFilter;

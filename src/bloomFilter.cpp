@@ -36,3 +36,9 @@ std::vector<std::string>& BloomFilter::get_black_list(){
 hFunc& BloomFilter::get_hFunc1(){
    return this->hFunc1;
 }
+hFunc& BloomFilter::get_hFunc2(){
+   return this->hFunc2;
+}
+bool BloomFilter::get_hFunc2Flag(){
+   return this->hFunc2Flag;
+}
