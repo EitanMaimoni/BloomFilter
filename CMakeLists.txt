@@ -22,6 +22,7 @@ set(SOURCE_FILES
     src/twoHashValidator.cpp # Add this line if twoHashBloomFilterValidator.cpp is a source file
     src/addUrl.cpp
     src/checkUrl.cpp
+    src/commandValidator
 )
 
 set(TEST_FILES
@@ -29,6 +30,7 @@ set(TEST_FILES
     tests/test_main.cpp # this is the main for tests
     tests/oneHashValidator_test.cpp # this file contain the tests
     tests/twoHashValidator_test.cpp # this file contain the tests
+    tests/commandValidator_test.cpp
 )
 add_executable(bloomFilter ${SOURCE_FILES} ${TEST_FILES})
 # Link Google Test to the test executable
