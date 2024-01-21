@@ -27,19 +27,12 @@ BloomFilter::BloomFilter(int ArrayLength , int firstHash, int secondHash) {
     black_list = std::vector<std::string>();
 }  
 //geters
-    std::vector<bool>& BloomFilter::get_bit_array() {
-        return this->bit_array;
-    }
-    std::vector<std::string>& BloomFilter::get_black_list(){
-        return this->black_list;
-    }
-    hFunc& BloomFilter::get_hFunc1(){
-        return this->hFunc1;
-    }
-//seters
-    void BloomFilter::set_bit_array(std::vector<bool>& bit_array){
-        this->bit_array = bit_array;
-    }
-    void BloomFilter::set_black_list(std::vector<std::string>& black_list){
-        this->black_list = black_list;
-    }
+std::vector<bool>& BloomFilter::get_bit_array() {
+    return this->bit_array;
+}
+std::vector<std::string>& BloomFilter::get_black_list(){
+    return this->black_list;
+}
+hFunc& BloomFilter::get_hFunc1(){
+   return this->hFunc1;
+}

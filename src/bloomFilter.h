@@ -28,8 +28,6 @@ public:
     hFunc& get_hFunc1();
     hFunc& get_hFunc2();
     bool get_hFunc2Flag();
-    void set_bit_array(std::vector<bool>& bit_array);
-    void set_black_list(std::vector<std::string>& black_list);
 
 private:
     std::vector<bool> bit_array;  // Bit array for the bloom filter
