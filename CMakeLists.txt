@@ -18,20 +18,22 @@ enable_testing()
 set(SOURCE_FILES
     src/bloomFilter.cpp # this is where the code we want to test
     src/hFunc.cpp  # Add this line if hFunc.cpp is a source file
+    src/oneHashBloomFilterValidator.cpp # Add this line if oneHashBloomFilterValidator.cpp is a source file
+    src/twoHashBloomFilterValidator.cpp # Add this line if twoHashBloomFilterValidator.cpp is a source file
     src/addUrl.cpp
     src/checkUrl.cpp
 )
 
 set(TEST_FILES
     tests/test_main.cpp # this is the main for tests
-    tests/bloomFilter_test.cpp # this file contain the tests
-    
+    tests/oneHashBloomFilterValidator_test.cpp # this file contain the tests
+    tests/twoHashBloomFilterValidator_test.cpp # this file contain the tests
 )
-add_executable(bloomFilter ${SOURCE_FILES} ${TEST_FILES})
+add_executable(oneHashBloomFilterValidator ${SOURCE_FILES} ${TEST_FILES})
 # Link Google Test to the test executable
-target_link_libraries(bloomFilter PRIVATE gtest gtest_main)
+target_link_libraries(oneHashBloomFilterValidator PRIVATE gtest gtest_main)
 
 # Include the source directory for tests
-target_include_directories(bloomFilter PRIVATE src)
+target_include_directories(oneHashBloomFilterValidator PRIVATE src)
 include(GoogleTest)
-add_test(NAME bloomFilter COMMAND bloomFilter)
+add_test(NAME oneHashBloomFilterValidator COMMAND oneHashBloomFilterValidator)
