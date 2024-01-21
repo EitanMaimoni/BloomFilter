@@ -5,15 +5,22 @@
 #include "twoHashValidator.h"
 #include "oneHashValidator.h" 
 #include "commandValidator.h"
-
+#include "Icommand.h"
+#include "addUrl.h"
+#include "checkUrl.h"
 // Default constructor
 app::app() {
     
 };
 
 void app::run() {
-
+    std::map<std::string, Icommand*>commands ;
     BloomFilter myBloomFilter;
+    Icommand* addCommand = new addUrl(&myBloomFilter);
+    Icommand* checkCommand = new checkUrl(&myBloomFilter);
+    commands["1"] = addCommand;
+    commands["2"] = checkCommand;
+
     oneHashValidator myValidator1;
     twoHashValidator myValidator2;
 
@@ -53,5 +60,7 @@ void app::run() {
                 break;
             }
         }
+        commands[commandInput[0]]->execute(commandInput[1]);
     }
+    
 }
