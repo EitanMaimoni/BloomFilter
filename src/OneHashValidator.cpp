@@ -1,14 +1,15 @@
-#include "oneHashValidator.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include "OneHashValidator.h"
+
 
 // Default constructor
-oneHashValidator::oneHashValidator() {
+OneHashValidator::OneHashValidator() {
     
 }
 
-std::vector<std::string> oneHashValidator::validationCheck(std::string& line) {
+std::vector<std::string> OneHashValidator::validationCheck(std::string& line) {
 
     // Create a vector to store the result
     std::vector<std::string> result(2);

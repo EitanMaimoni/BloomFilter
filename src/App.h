@@ -1,11 +1,11 @@
 #ifndef APP_H
 #define APP_H
 
-class app {
+class App {
     public:
 
     // Default constructor
-    app();
+    App();
 
     // Add URL to the bloom filter
     void run();

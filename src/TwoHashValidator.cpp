@@ -1,14 +1,14 @@
-#include "twoHashValidator.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include "TwoHashValidator.h"
 
 // Default constructor
-twoHashValidator::twoHashValidator() {
+TwoHashValidator::TwoHashValidator() {
     
 };
 
-std::vector<std::string> twoHashValidator::validationCheck(std::string& line) {
+std::vector<std::string> TwoHashValidator::validationCheck(std::string& line) {
 
     // Create a vector of strings to store the result
     std::vector<std::string> result(3);

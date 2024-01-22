@@ -1,13 +1,13 @@
 #ifndef CHECKURL_H
 #define CHECKURL_H
-#include "bloomFilter.h"
-#include "Icommand.h"
+#include "BloomFilter.h"
+#include "ICommand.h"
 
-class checkUrl: public Icommand{
+class CheckUrl: public ICommand{
     public:
 
         // Constructor
-        checkUrl(BloomFilter* bloomFilter) ;
+        CheckUrl(BloomFilter* bloomFilter) ;
 
         // Add URL to the bloom filter
         void execute(std::string& url)override;
@@ -18,13 +18,13 @@ class checkUrl: public Icommand{
         BloomFilter* bloomFilter;
 
         // Check if the URL is on the bit array
-        bool is_on_bit_array(std::string& url);
+        bool isOnBitArray(std::string& url);
 
         // Check if the URL is on the black list
-        bool is_on_black_list(std::string& url);
+        bool isOnBlackList(std::string& url);
 
         // Check if the URL is blacklisted
-        void check_url(std::string& url);
+        void checkUrl(std::string& url);
 
 };
 #endif  // CHECKURL_H

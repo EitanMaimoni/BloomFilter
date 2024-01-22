@@ -1,34 +1,34 @@
 #include <iostream>
 #include <string>
-#include "app.h"
-#include "bloomFilter.h"
-#include "twoHashValidator.h"
-#include "oneHashValidator.h" 
-#include "commandValidator.h"
-#include "Icommand.h"
-#include "addUrl.h"
-#include "checkUrl.h"
+#include "App.h"
+#include "BloomFilter.h"
+#include "TwoHashValidator.h"
+#include "OneHashValidator.h" 
+#include "CommandValidator.h"
+#include "ICommand.h"
+#include "AddUrl.h"
+#include "CheckUrl.h"
 
 // Default constructor
-app::app() {
+App::App() {
     
 };
 
-void app::run() {
+void App::run() {
 
     // Create a BloomFilter object
     BloomFilter myBloomFilter;
 
     // Create a map of commands
-    std::map<std::string, Icommand*> commands;
-    Icommand* addCommand = new addUrl(&myBloomFilter);
-    Icommand* checkCommand = new checkUrl(&myBloomFilter);
+    std::map<std::string, ICommand*> commands;
+    ICommand* addCommand = new AddUrl(&myBloomFilter);
+    ICommand* checkCommand = new CheckUrl(&myBloomFilter);
     commands["1"] = addCommand;
     commands["2"] = checkCommand;
 
     // Create a validators for the input
-    oneHashValidator myValidator1;
-    twoHashValidator myValidator2;
+    OneHashValidator myValidator1;
+    TwoHashValidator myValidator2;
 
     // Create a string to store the input
     std::string firstInput;
@@ -58,7 +58,7 @@ void app::run() {
     }
 
     // Create a validator for the input
-    commandValidator myCommandValidator;
+    CommandValidator myCommandValidator;
 
     // Create a string to store the input
     std::string secondInput;

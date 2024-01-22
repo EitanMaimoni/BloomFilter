@@ -1,14 +1,14 @@
 #ifndef ADDURL_H
 #define ADDURL_H
 
-#include "bloomFilter.h"
-#include "Icommand.h"
+#include "BloomFilter.h"
+#include "ICommand.h"
 
-class addUrl: public Icommand{
+class AddUrl: public ICommand{
     public:
 
         // Constructor
-        addUrl(BloomFilter* bloomFilter);
+        AddUrl(BloomFilter* bloomFilter);
 
         // Add URL to the bloom filter
          void execute(std::string& url)override;
@@ -19,10 +19,10 @@ class addUrl: public Icommand{
         BloomFilter* bloomFilter;
 
         // Add URL to the black list
-        void add_to_black_list(std::string& url);
+        void addToBlackList(std::string& url);
 
         // Add URL to the bit array
-        void add_to_bit_array(std::string& url);
+        void addToBitArray(std::string& url);
 
 };
 #endif  // ADDURL_H

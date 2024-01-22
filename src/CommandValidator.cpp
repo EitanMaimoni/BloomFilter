@@ -1,14 +1,14 @@
-#include "commandValidator.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include "CommandValidator.h"
 
 // Default constructor
-commandValidator::commandValidator() {
+CommandValidator::CommandValidator() {
     
 };
 
-std::vector<std::string> commandValidator::validationCheck(std::string& line) {
+std::vector<std::string> CommandValidator::validationCheck(std::string& line) {
 
     // Create a vector to store the result
     std::vector<std::string> result(2);

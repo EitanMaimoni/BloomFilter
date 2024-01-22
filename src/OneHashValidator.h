@@ -3,13 +3,13 @@
 
 #include <vector>
 #include <string>
-#include "iValidator.h" 
+#include "IValidator.h" 
 
-class oneHashValidator : public iValidator {
+class OneHashValidator : public IValidator {
 public:
 
     // Default constructor
-    oneHashValidator();
+    OneHashValidator();
 
     // Check if the line is valid
     std::vector<std::string> validationCheck(std::string& line);

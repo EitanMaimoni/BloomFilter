@@ -2,7 +2,7 @@
 #define ICOMMAND_H
 #include <string>
 
-class Icommand {
+class ICommand {
     public:
 
         // Every command must have an execute function

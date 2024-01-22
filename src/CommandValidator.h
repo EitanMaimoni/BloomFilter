@@ -3,14 +3,14 @@
 
 #include <vector>
 #include <string>
-#include "iValidator.h" 
+#include "IValidator.h" 
 
 
-class commandValidator : public iValidator {
+class CommandValidator : public IValidator {
 public:
 
     // Default constructor
-    commandValidator();
+    CommandValidator();
 
     // Member function for validation check
     std::vector<std::string> validationCheck(std::string& line);

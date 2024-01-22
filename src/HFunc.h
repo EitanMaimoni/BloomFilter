@@ -6,14 +6,14 @@
 #include <regex>
 #include <stdexcept>
 
-class hFunc {
+class HFunc {
     public:
 
     // Default constructor
-    hFunc();
+    HFunc();
 
     //  Constructor
-    hFunc(int number);
+    HFunc(int number);
 
     // Add URL to the bloom filter
     size_t activateFunction(std::string& url);

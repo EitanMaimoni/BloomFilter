@@ -1,21 +1,21 @@
-#include "hFunc.h"
+#include "HFunc.h"
 
 // Default constructor
-hFunc::hFunc() {
+HFunc::HFunc() {
 
     this->numOfHash = 1;
 
 }
 
 // Constructor
- hFunc::hFunc(int number) {
+ HFunc::HFunc(int number) {
 
     this->numOfHash = number;
 
 }
 
 // Return the index from the hash function
-size_t hFunc::activateFunction(std::string& url) {
+size_t HFunc::activateFunction(std::string& url) {
 
     size_t index;
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-class iValidator {
+class IValidator {
 public:
 
     // Every Validator must have a validationCheck function
