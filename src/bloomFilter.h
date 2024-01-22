@@ -10,15 +10,17 @@
 
 class BloomFilter {
 public:
+
     // Default constructor
     BloomFilter();
+
     // Constructor with hash function
     BloomFilter(int ArrayLength ,int firstHash);
+
     // Constructor with hash functions
     BloomFilter(int ArrayLength , int firstHash, int secondHash);
 
-  
-    //geters and setters
+    // Getters
     std::string& get_url();
     std::vector<bool>& get_bit_array();
     std::vector<std::string>& get_black_list();
@@ -27,12 +29,22 @@ public:
     bool get_hFunc2Flag();
 
 private:
-    std::vector<bool> bit_array;  // Bit array for the bloom filter
-    std::vector<std::string> black_list;  // Blacklisted URLs
+
+    // Bit array for the bloom filter
+    std::vector<bool> bit_array;  
+
+    // Blacklisted URLs
+    std::vector<std::string> black_list; 
+
+    // First hash function 
     hFunc hFunc1;
+
+    // Second hash function
     hFunc hFunc2;
-    bool hFunc2Flag;   
-    
+
+    // Flag for the second hash function
+    bool hFunc2Flag;  
+     
 };
 
 #endif  // BLOOMFILTER_H

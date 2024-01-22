@@ -8,11 +8,13 @@
 
 class twoHashValidator : public iValidator {
 public:
+
     // Default constructor
     twoHashValidator();
 
-    // Member function for validation check
+    // Check if the line is valid
     std::vector<std::string> validationCheck(std::string& line);
+    
 };
 
 #endif // TWOHASHVALIDATOR_H

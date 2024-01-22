@@ -8,16 +8,21 @@
 
 class hFunc {
     public:
+
     // Default constructor
     hFunc();
-    //  constructor
+
+    //  Constructor
     hFunc(int number);
 
     // Add URL to the bloom filter
     size_t activateFunction(std::string& url);
 
 private:
+
+    // Number of repetitions
     int numOfHash; 
+
 };
 
 #endif  // HFUNC;

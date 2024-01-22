@@ -1,18 +1,19 @@
-#ifndef ONE_HASH_BLOOM_FILTER_VALIDATOR_H
-#define ONE_HASH_BLOOM_FILTER_VALIDATOR_H
+#ifndef ONEHASHVALIDATOR_H
+#define ONEHASHVALIDATOR_H
 
 #include <vector>
 #include <string>
-#include "iValidator.h" // Include the header for the base class
-
+#include "iValidator.h" 
 
 class oneHashValidator : public iValidator {
 public:
+
     // Default constructor
     oneHashValidator();
 
-    // Member function for validation check
+    // Check if the line is valid
     std::vector<std::string> validationCheck(std::string& line);
+
 };
 
-#endif // ONE_HASH_BLOOM_FILTER_VALIDATOR_H
+#endif // ONEHASHVALIDATOR_H
