@@ -5,8 +5,8 @@ in order to compile and run our code you'll have to download c++ compiler, follo
 https://code.visualstudio.com/docs/cpp/config-mingw
 
 after the compiler is installed, navigate to the src folder in command line and type the following command:
-g++ -o bloomFilter ./main.cpp ./bloomFilter.cpp ./checkUrl.cpp ./addUrl ./app.cpp ./hFunc.cpp ./oneHashBloomFilterValidator.cpp ./twoHashBloomFilterValidator.cpp
-./bloomFilter
+g++ ./main.cpp ./AddUrl.cpp ./App.cpp ./BloomFilter.cpp ./CheckUrl.cpp ./CommandValidator.cpp ./HFunc.cpp ./OneHashValidator.cpp ./TwoHashValidator.cp
+./a.out
 
 thats it!
 
