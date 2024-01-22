@@ -4,9 +4,11 @@ running and compiling the code:
 in order to compile and run our code you'll have to download c++ compiler, follow the instruction on this link-
 https://code.visualstudio.com/docs/cpp/config-mingw
 
-after the compiler is installed, navigate to the src folder in command line and type the following command:
-g++ -o bloomFilter ./main.cpp ./AddUrl.cpp ./App.cpp ./BloomFilter.cpp ./CheckUrl.cpp ./CommandValidator.cpp ./HFunc.cpp ./OneHashValidator.cpp ./TwoHashValidator.cpp
-./bloomFilter
+after the compiler is installed, navigate to the src folder in command line and type the following commands:
+g++ ./main.cpp ./AddUrl.cpp ./App.cpp ./BloomFilter.cpp ./CheckUrl.cpp ./CommandValidator.cpp ./HFunc.cpp ./OneHashValidator.cpp ./TwoHashValidator.cpp
+./a.out
+
+those commands are for linux operating system.
 
 thats it!
 
