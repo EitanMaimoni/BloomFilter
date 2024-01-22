@@ -6,18 +6,23 @@
 #include <regex>
 #include <stdexcept>
 
-class hFunc {
+class HFunc {
     public:
+
     // Default constructor
-    hFunc();
-    //  constructor
-    hFunc(int number);
+    HFunc();
+
+    //  Constructor
+    HFunc(int number);
 
     // Add URL to the bloom filter
     size_t activateFunction(std::string& url);
 
 private:
+
+    // Number of repetitions
     int numOfHash; 
+
 };
 
 #endif  // HFUNC;

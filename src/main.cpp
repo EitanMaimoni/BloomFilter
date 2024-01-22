@@ -1,10 +1,15 @@
 #include <iostream>
 #include <string>
-#include "app.h" 
+#include "App.h" 
 
 
 int main() {
-     app myApp;
+
+    // Create an instance of the app
+     App myApp;
+     // Run the app
      myApp.run();
+     
     return 0;
+
 }
