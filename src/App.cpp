@@ -47,7 +47,7 @@ void App::run() {
         }
 
         // Check if we can read X and Y
-        initInput = myValidator2.validationCheck(firstInput);
+        initInput = myValidator1.validationCheck(firstInput);
         if (initInput != std::vector<std::string>()) {
             // If we get here, we successfully read X, Y
             myBloomFilter = BloomFilter(std::stoi(initInput[0]), std::stoi(initInput[1]));
