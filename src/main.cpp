@@ -11,11 +11,16 @@ void handleClient(int client_sock, App& myApp) {
         int read_bytes = recv(client_sock, buffer, sizeof(buffer), 0);
         if (read_bytes > 0) {
             // Process the received data with myApp
-            std::string request(buffer);
-            std::string response = myApp.processRequest(request);
-            // Send the response back to the client
-            send(client_sock, response.c_str(), response.length(), 0);
-            std::cout << "Response sent to client." << std::endl;
+            std::istringstream iss(buffer);
+            std::string line;
+            while (std::getline(iss, line)) {
+                // Process each line as a separate request
+                std::cout << "Server Got: " << line << std::endl;
+                std::string response = myApp.processRequest(line); // Use 'line' instead of 'request'
+                // Send the response back to the client
+                send(client_sock, response.c_str(), response.length(), 0);
+                std::cout << "Response sent to client." << std::endl;
+            }
         } else if (read_bytes == 0) {
             // Connection closed by client
             std::cout << "Client disconnected." << std::endl;
@@ -28,6 +33,7 @@ void handleClient(int client_sock, App& myApp) {
     }
     closesocket(client_sock); // Close the client socket
 }
+
 
 int main() {
     WSADATA wsaData;
