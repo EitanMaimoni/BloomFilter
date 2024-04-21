@@ -11,7 +11,7 @@ class AddUrl: public ICommand{
         AddUrl(BloomFilter* bloomFilter);
 
         // Add URL to the bloom filter
-         void execute(std::string& url)override;
+         std::string execute(std::string& url)override;
 
     private:
 
