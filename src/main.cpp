@@ -1,8 +1,11 @@
 #include "App.h"
 #include <iostream>
-#include <WinSock2.h>
-#include <ws2tcpip.h>
+#include <cstring>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
 #include <thread>
+#include <arpa/inet.h>
 
 void handleClient(int client_sock, App& myApp) {
     char buffer[4096];
@@ -31,62 +34,52 @@ void handleClient(int client_sock, App& myApp) {
             break;
         }
     }
-    closesocket(client_sock); // Close the client socket
+    close(client_sock); // Close the client socket
 }
 
 
 int main() {
-    WSADATA wsaData;
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        std::cerr << "WSAStartup failed." << std::endl;
-        return 1;
-    }
-
     const int server_port = 5555;
-    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock == INVALID_SOCKET) {
-        std::cerr << "error creating socket: " << WSAGetLastError() << std::endl;
-        WSACleanup();
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (sock < 0) {
+        std::cerr << "error creating socket" << std::endl;
         return 1;
     }
 
     int opt = 1;
     // Set SO_REUSEADDR to allow the local address to be reused
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&opt, sizeof(opt)) == SOCKET_ERROR) {
-        std::cerr << "setsockopt failed: " << WSAGetLastError() << std::endl;
-        closesocket(sock);
-        WSACleanup();
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)) < 0) {
+        std::cerr << "setsockopt failed" << std::endl;
+        close(sock);
         return 1;
     }
 
-    sockaddr_in sin;
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = INADDR_ANY;
-    sin.sin_port = htons(server_port);
+    sockaddr_in server_addr;
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+    server_addr.sin_port = htons(server_port);
 
-    if (bind(sock, (sockaddr*)&sin, sizeof(sin)) == SOCKET_ERROR) {
-        std::cerr << "error binding socket: " << WSAGetLastError() << std::endl;
-        closesocket(sock);
-        WSACleanup();
+    if (bind(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+        std::cerr << "error binding socket" << std::endl;
+        close(sock);
         return 1;
     }
 
-    if (listen(sock, 5) == SOCKET_ERROR) {
-        std::cerr << "error listening to a socket: " << WSAGetLastError() << std::endl;
-        closesocket(sock);
-        WSACleanup();
+    if (listen(sock, 5) < 0) {
+        std::cerr << "error listening to a socket" << std::endl;
+        close(sock);
         return 1;
     }
 
     bool initApp = false;
     App* myApp = nullptr; // Declare myApp as a pointer and initialize it to nullptr
     while (true) {
-        sockaddr_in client_sin;
-        int addr_len = sizeof(client_sin);
-        SOCKET client_sock = accept(sock, (sockaddr*)&client_sin, &addr_len);
-        if (client_sock == INVALID_SOCKET) {
-            std::cerr << "error accepting client: " << WSAGetLastError() << std::endl;
+        sockaddr_in client_addr;
+        socklen_t addr_len = sizeof(client_addr);
+        int client_sock = accept(sock, (struct sockaddr*)&client_addr, &addr_len);
+        if (client_sock < 0) {
+            std::cerr << "error accepting client" << std::endl;
             continue; // Skip to the next iteration
         }
         if (!initApp) {
@@ -94,8 +87,8 @@ int main() {
             memset(buffer, 0, sizeof(buffer));
             int read_bytes = recv(client_sock, buffer, sizeof(buffer), 0);
             if (read_bytes <= 0) {
-                std::cerr << "error reading from client: " << WSAGetLastError() << std::endl;
-                closesocket(client_sock);
+                std::cerr << "error reading from client" << std::endl;
+                close(client_sock);
                 continue; // Skip to the next iteration
             }
             std::string request(buffer);
@@ -112,7 +105,6 @@ int main() {
     }
 
     delete myApp;
-    closesocket(sock);
-    WSACleanup();
+    close(sock);
     return 0;
 }

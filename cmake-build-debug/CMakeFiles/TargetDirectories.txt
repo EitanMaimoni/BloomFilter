@@ -1,0 +1,3 @@
+/home/ori/CLionProjects/Project-ONE-ex1/cmake-build-debug/CMakeFiles/BloomFilter.dir
+/home/ori/CLionProjects/Project-ONE-ex1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ori/CLionProjects/Project-ONE-ex1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
