@@ -6,7 +6,7 @@ on:
       - created
   push:
     branches:
-      - support_branch
+      - Production-part-4
 
 jobs:
   build-and-push:
