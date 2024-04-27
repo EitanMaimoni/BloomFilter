@@ -26,7 +26,7 @@ jobs:
           docker buildx build --platform linux/amd64,linux/arm64 -t orile24/ex1:latest -t orile24/ex1:${{ github.event_name }} --push .
           echo "DOCKER_IMAGE_LATEST=orile24/ex1:latest" >> $GITHUB_ENV
           echo "DOCKER_IMAGE_EVENT=orile24/ex1:${{ github.event_name }}" >> $GITHUB_ENV
-          EXPOSE 5555
+      
 
     env:
       DOCKER_CLI_AARCH64: 1
