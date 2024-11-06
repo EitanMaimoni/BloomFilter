@@ -1,26 +1,39 @@
-cmake_minimum_required(VERSION 3.14)
-project(Ex1)  # Replace "Ex1" with your project name
+cmake_minimum_required(VERSION 3.10)
+project(BloomFilterServer)
 
-set(CMAKE_CXX_STANDARD 14)
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# List your source files with correct paths
-set(SOURCE_FILES
-        src/main.cpp
-        src/AddUrl.cpp
-        src/App.cpp
-        src/BloomFilter.cpp
-        src/CheckUrl.cpp
-        src/CommandValidator.cpp
-        src/HFunc.cpp
-        src/OneHashValidator.cpp
-        src/TwoHashValidator.cpp
-        )
-
-# Create an executable target named "BloomFilter"
-add_executable(BloomFilter ${SOURCE_FILES})
-
-# Link against the Winsock library for Windows sockets
+# Add windows socket library
 if(WIN32)
-    target_link_libraries(BloomFilter Ws2_32)
+    link_libraries(ws2_32)
+endif()
+
+# Source files
+set(SOURCES
+    src/main.cpp
+    src/AddUrl.cpp
+    src/App.cpp
+    src/BloomFilter.cpp
+    src/CheckUrl.cpp
+    src/CommandValidator.cpp
+    src/HFunc.cpp
+    src/OneHashValidator.cpp
+    src/TwoHashValidator.cpp
+)
+
+# Create executable
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+# Add compiler flags
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4)
+else()
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
 endif()

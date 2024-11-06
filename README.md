@@ -1,1 +1,13 @@
-For detailed information about this project, including instructions on how to run it and a summary of what we accomplished, please visit our wikipages directory on the JS server: [GitHub Project One Server - Production Part 4](https://github.com/EitanMaimoni/project-one-server/tree/Production-part-4).
+#temporary readme
+
+# Create a build directory
+mkdir build
+cd build
+
+# Configure CMake
+cmake ..
+
+# Build the project
+cmake --build . --config Release
+
+build/Release/BloomFilterServer.exe
