@@ -11,7 +11,7 @@ AddUrl::AddUrl(BloomFilter* bloomFilter) {
 }
         
 // Add URL to the bloom filter
-void AddUrl::execute(std::string& url) {
+std::string AddUrl::execute(std::string& url) {
 
     //Add the URL to the black list
     addToBlackList(url);
@@ -19,7 +19,8 @@ void AddUrl::execute(std::string& url) {
     // Add the URL to the bit array filter
     addToBitArray(url);
 
-};
+    return "URL added to the bloom filter";
+}
    
 // Add URL to the black list
 void AddUrl::addToBlackList(std::string& url) {
@@ -28,7 +29,7 @@ void AddUrl::addToBlackList(std::string& url) {
 
 }
 
-// Add URL to the bit array 
+// Add URL to the bit array
 void AddUrl::addToBitArray(std::string& url) {
 
         // Get the index of the first hash function
@@ -43,5 +44,5 @@ void AddUrl::addToBitArray(std::string& url) {
             index = bloomFilter->getHFunc2().activateFunction(url);
             // Set the bit to true
             bloomFilter->getBitArray()[index % bloomFilter->getBitArray().size()] = true;
-        } 
+        }
  }

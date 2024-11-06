@@ -2,6 +2,7 @@
 #define CHECKURL_H
 #include "BloomFilter.h"
 #include "ICommand.h"
+#include <string>
 
 class CheckUrl: public ICommand{
     public:
@@ -10,7 +11,7 @@ class CheckUrl: public ICommand{
         CheckUrl(BloomFilter* bloomFilter) ;
 
         // Add URL to the bloom filter
-        void execute(std::string& url)override;
+        std::string execute(std::string& url)override;
 
     private:
 
@@ -24,7 +25,7 @@ class CheckUrl: public ICommand{
         bool isOnBlackList(std::string& url);
 
         // Check if the URL is blacklisted
-        void checkUrl(std::string& url);
+        std::string checkUrl(std::string& url);
 
 };
 #endif  // CHECKURL_H

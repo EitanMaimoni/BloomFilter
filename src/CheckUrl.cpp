@@ -11,9 +11,8 @@ CheckUrl::CheckUrl(BloomFilter* bloomFilter) {
 }
 
 // Execute the command
-void CheckUrl::execute(std::string& url) {
-
-    checkUrl(url);
+std::string CheckUrl::execute(std::string& url) {
+    return checkUrl(url);
 }
 
 // Check if the URL is in the bit array
@@ -52,23 +51,27 @@ bool CheckUrl::isOnBlackList(std::string& url) {
 }
 
 // Check if the URL is blacklisted
-void CheckUrl::checkUrl(std::string& url) {
+std::string CheckUrl::checkUrl(std::string& url) {
+    // creating string to store the result
+    std::string result = "";
 
     // Print if the URL is in the bit array
     if (this->isOnBitArray(url)) {
-        std::cout << "true ";
+        result += "true\n";
     }
     else {
-        std::cout << "false" << std::endl;;
-        return;
+        result += "false\n";
+        return result;
     }
 
     // Print if the URL is in the black list
     if (this->isOnBlackList(url)) {
-        std::cout << "true" << std::endl;   
+        result += "true\n";
     }
     else {
-        std::cout << "false" << std::endl;;
+        result += "false\n";
     }
+    
+    return result;
 
 }
