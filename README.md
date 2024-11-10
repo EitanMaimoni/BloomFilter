@@ -1,5 +1,5 @@
 
-# Bloom Filter Server
+# Bloom Filter Server - Linux
 
 This project is a C++ server that interacts with a React-based web application to filter and censor links. It approves or disapproves links based on a pre-defined set of censored URLs that are initialized when the web application connects to the server.
 
