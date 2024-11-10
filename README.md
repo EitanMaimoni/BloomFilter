@@ -1,16 +1,31 @@
-Create a build directory and navigate into it:
 
-mkdir build
-cd build
+# Bloom Filter Server
 
-Generate the makefiles using CMake:
+This project is a C++ server that interacts with a React-based web application to filter and censor links. It approves or disapproves links based on a pre-defined set of censored URLs that are initialized when the web application connects to the server.
 
-cmake ..
+## How to Run the Bloom Filter Server
 
-Compile the project:
+1. **From the project directory, create a build directory and navigate into it:**
 
-make
+    ```bash
+    mkdir build
+    cd build
+    ```
 
-Run the server:
+2. **Generate the makefiles using CMake:**
 
-./BloomFilter
+    ```bash
+    cmake ..
+    ```
+
+3. **Compile the project:**
+
+    ```bash
+    make
+    ```
+
+4. **Run the server:**
+
+    ```bash
+    ./BloomFilter
+    ```
