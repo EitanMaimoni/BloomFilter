@@ -27,5 +27,5 @@ This project is a C++ server that interacts with a React-based web application t
 4. **Run the server:**
 
     ```bash
-    build/Release/BloomFilterServer.exe
+    Release/BloomFilterServer.exe
     ```
